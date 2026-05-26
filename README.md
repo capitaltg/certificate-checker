@@ -14,6 +14,35 @@ Certificate Checker is written using Java and Spring Boot for the back-end API a
 ### Running Thea locally
 You can run the backend Thea API service locally by running `TheaServer.java` in Eclipse or by running `./gradlew bootRun`.  To run the front-end application locally, run `ng serve --proxy-config proxy.conf.json`.  That will start a local development server and will also proxy all requests made to `/api` to the backend service, which should now be running on port 8080.
 
+### Running Thea locally with Docker Compose
+A `docker-compose.yml` is included for spinning up a full local development stack — the Angular dev server, the Spring Boot API (with hot reload), and a Postgres database — without installing the toolchains on your host:
+
+```
+docker compose up
+```
+
+Once the containers are running, point your browser to http://localhost:4200. The Angular dev server proxies all `/api` requests to the backend API, which runs on http://localhost:8080. Source for both the UI and API is bind-mounted into the containers, so changes you make on the host are picked up automatically.
+
+The first startup is slow because it downloads npm and Gradle dependencies inside the containers; subsequent starts reuse the cached volumes.
+
+If you already have Postgres running on your host and would rather use it than the bundled `postgres` container, create a `docker-compose.override.yml` (it is git-ignored, so it won't be committed). Docker Compose merges it automatically:
+
+```yaml
+services:
+  thea-api:
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://host.docker.internal:5432/thea
+      SPRING_DATASOURCE_USERNAME: thea
+      SPRING_DATASOURCE_PASSWORD: thea
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on: !reset []
+  postgres:
+    profiles: ["bundled-db"]
+```
+
+Adjust the database name, username, and password to match your local Postgres.
+
 ### Design
 UI design components use [Bootstrap](https://getbootstrap.com) with the Flatly theme found [here](https://bootswatch.com/flatly/).
 
