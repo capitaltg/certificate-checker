@@ -1,26 +1,26 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterTestingModule } from '@angular/router/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { CertificateViewerComponent } from './certificate-viewer.component';
 import { CertificateComponent } from '../certificate/certificate.component';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('CertificateViewerComponent', () => {
   let component: CertificateViewerComponent;
   let fixture: ComponentFixture<CertificateViewerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      imports: [
-        NgbModule,
-        RouterTestingModule,
-        HttpClientTestingModule
-      ],
-      declarations: [
+    declarations: [
         CertificateViewerComponent,
-        CertificateComponent ]
-    })
+        CertificateComponent
+    ],
+    imports: [NgbModule,
+        RouterTestingModule],
+    providers: [provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
     .compileComponents();
   }));
 

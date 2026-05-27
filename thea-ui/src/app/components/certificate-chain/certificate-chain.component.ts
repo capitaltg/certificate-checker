@@ -1,8 +1,9 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-certificate-chain',
-  templateUrl: './certificate-chain.component.html'
+    selector: 'app-certificate-chain',
+    templateUrl: './certificate-chain.component.html',
+    standalone: false
 })
 export class CertificateChainComponent implements OnInit {
 

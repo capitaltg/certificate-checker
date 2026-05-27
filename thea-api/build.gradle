@@ -1,8 +1,8 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.3.12'
+    id 'org.springframework.boot' version '3.5.0'
     id 'io.spring.dependency-management' version '1.1.7'
-    id "io.freefair.lombok" version "8.2.2"
+    id "io.freefair.lombok" version "8.13.1"
     // id "org.flywaydb.flyway" version "10.6.0"
 }
 
@@ -23,8 +23,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.11.0'
     
     implementation "org.springframework.boot:spring-boot-starter-actuator"
-    implementation 'org.bouncycastle:bcpkix-jdk18on:1.77'
-    implementation 'com.mysql:mysql-connector-j:8.4.0'
+    implementation 'org.bouncycastle:bcpkix-jdk18on:1.80'
+    implementation 'com.mysql:mysql-connector-j:9.1.0'
 
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2:2.3.232'

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
@@ -26,32 +26,25 @@ import {
 import { CertificateViewerComponent } from './components/certificate-viewer/certificate-viewer.component';
 import { CertificateChainComponent } from './components/certificate-chain/certificate-chain.component';
 
-@NgModule({
-  declarations: [
-    AboutComponent,
-    AppComponent,
-    AppNavbarComponent,
-    CallbackComponent,
-    CertificateComponent,
-    CertificateViewerComponent,
-    ProfileComponent,
-    RecentComponent,
-    ReportsComponent,
-    SearchComponent,
-    CertificateChainComponent,
-    ChainComponent,
-    TrustedComponent,
-    HistoryComponent,
-    HomeComponent,
-  ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    FormsModule,
-    HttpClientModule,
-    NgbModule,
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AboutComponent,
+        AppComponent,
+        AppNavbarComponent,
+        CallbackComponent,
+        CertificateComponent,
+        CertificateViewerComponent,
+        ProfileComponent,
+        RecentComponent,
+        ReportsComponent,
+        SearchComponent,
+        CertificateChainComponent,
+        ChainComponent,
+        TrustedComponent,
+        HistoryComponent,
+        HomeComponent,
+    ],
+    bootstrap: [AppComponent], imports: [AppRoutingModule,
+        BrowserModule,
+        FormsModule,
+        NgbModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
