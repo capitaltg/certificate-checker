@@ -10,7 +10,7 @@
 
 services:
   thea-api:
-    image: eclipse-temurin:17-jdk
+    image: eclipse-temurin:21-jdk
     working_dir: /app
     command: ./gradlew bootRun --no-daemon
     ports:
