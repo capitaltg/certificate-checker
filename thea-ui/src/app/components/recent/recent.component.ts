@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CertificateService } from '../../services/certificate.service';
 
 @Component({
-  selector: 'app-recent',
-  templateUrl: './recent.component.html'
+    selector: 'app-recent',
+    templateUrl: './recent.component.html',
+    standalone: false
 })
 export class RecentComponent implements OnInit {
 

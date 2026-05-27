@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CertificateService } from '../../../app/services';
 
 @Component({
-  selector: 'app-chain',
-  templateUrl: './history.component.html'
+    selector: 'app-chain',
+    templateUrl: './history.component.html',
+    standalone: false
 })
 export class HistoryComponent implements OnInit {
 

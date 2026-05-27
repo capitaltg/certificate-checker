@@ -3,8 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { CertificateService } from '../../../app/services';
 
 @Component({
-  selector: 'app-trusted',
-  templateUrl: './trusted.component.html'
+    selector: 'app-trusted',
+    templateUrl: './trusted.component.html',
+    standalone: false
 })
 export class TrustedComponent implements OnInit {
 

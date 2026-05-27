@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CertificateService } from '../../../app/services';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html'
+    selector: 'app-home',
+    templateUrl: './home.component.html',
+    standalone: false
 })
 export class HomeComponent implements OnInit {
 

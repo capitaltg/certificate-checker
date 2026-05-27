@@ -2,6 +2,7 @@ package com.capitaltg.thea.certificates;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import javax.net.ssl.X509TrustManager;
 
 public class GullibleTrustManager implements X509TrustManager {
 
-  List<X509Certificate> serverCertificates;
+  List<X509Certificate> serverCertificates = new ArrayList<>();
 
   @Override
   public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {

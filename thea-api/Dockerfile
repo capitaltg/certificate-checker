@@ -1,4 +1,7 @@
-FROM eclipse-temurin:17-jre-alpine
+FROM eclipse-temurin:21-jre-alpine
+
+# Patch OS packages (e.g. libpng CVE-2026-40930) on top of the base image.
+RUN apk update && apk upgrade --no-cache
 
 RUN adduser --disabled-password ctg
 RUN mkdir /app

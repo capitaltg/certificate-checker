@@ -1,0 +1,62 @@
+# Local development stack for Certificate Checker / Thea.
+#
+#   docker compose up
+#
+# Angular dev server:  http://localhost:4200  (live reload, proxies /api -> thea-api)
+# Spring Boot API:     http://localhost:8080  (gradle bootRun, hot reload via devtools)
+#
+# Source is bind-mounted into each container, so edits on the host are picked up
+# without rebuilding the images.
+
+services:
+  thea-api:
+    image: eclipse-temurin:21-jdk
+    working_dir: /app
+    command: ./gradlew bootRun --no-daemon
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/thea
+      SPRING_DATASOURCE_USERNAME: thea
+      SPRING_DATASOURCE_PASSWORD: thea
+    volumes:
+      - ./thea-api:/app
+      - gradle-cache:/root/.gradle
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  thea-ui:
+    image: node:24
+    working_dir: /app
+    # Install deps on first run, then start the dev server bound to all interfaces.
+    command: sh -c "npm install && npm run ng -- serve --host 0.0.0.0 --proxy-config proxy.conf.docker.json"
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./thea-ui:/app
+      - ui-node-modules:/app/node_modules
+    depends_on:
+      - thea-api
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: thea
+      POSTGRES_USER: thea
+      POSTGRES_PASSWORD: thea
+    ports:
+      - "5432:5432"
+    volumes:
+      - thea-pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U thea -d thea"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  gradle-cache:
+  ui-node-modules:
+  thea-pgdata:

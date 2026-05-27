@@ -4,8 +4,9 @@ import { Router } from '@angular/router';
 import { CertificateService } from '../../../app/services';
 
 @Component({
-  selector: 'app-certificate',
-  templateUrl: './certificate.component.html'
+    selector: 'app-certificate',
+    templateUrl: './certificate.component.html',
+    standalone: false
 })
 export class CertificateComponent implements OnInit {
 

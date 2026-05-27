@@ -3,8 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SearchService } from '../../services/search.service';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html'
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    standalone: false
 })
 export class SearchComponent implements OnInit {
 
